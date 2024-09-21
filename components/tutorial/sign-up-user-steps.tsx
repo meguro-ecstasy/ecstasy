@@ -7,30 +7,30 @@ export default function SignUpUserSteps() {
     <ol className="flex flex-col gap-6">
       {process.env.VERCEL_ENV === "preview" ||
       process.env.VERCEL_ENV === "production" ? (
-        <TutorialStep title="Set up redirect urls">
-          <p>It looks like this App is hosted on Vercel.</p>
+        <TutorialStep title="リダイレクトURLの設定">
+          <p>このアプリはVercelでホストされているようです。</p>
           <p className="mt-4">
-            This particular deployment is
+            この特定のデプロイメントは
             <span className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground border">
               "{process.env.VERCEL_ENV}"
             </span>{" "}
-            on
+            環境の
             <span className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground border">
               https://{process.env.VERCEL_URL}
             </span>
-            .
+            です。
           </p>
           <p className="mt-4">
-            You will need to{" "}
+            VercelのデプロイメントURLに基づいて、{" "}
             <Link
               className="text-primary hover:text-foreground"
               href={
                 "https://supabase.com/dashboard/project/_/auth/url-configuration"
               }
             >
-              update your Supabase project
+              SupabaseプロジェクトのリダイレクトURLを更新
             </Link>{" "}
-            with redirect URLs based on your Vercel deployment URLs.
+            する必要があります。
           </p>
           <ul className="mt-4">
             <li>
@@ -50,15 +50,15 @@ export default function SignUpUserSteps() {
               <span className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground border">
                 {`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL?.replace(".vercel.app", "")}-*-[vercel-team-url].vercel.app/**`}
               </span>{" "}
-              (Vercel Team URL can be found in{" "}
+              (Vercel Team URLは{" "}
               <Link
                 className="text-primary hover:text-foreground"
                 href="https://vercel.com/docs/accounts/create-a-team#find-your-team-id"
                 target="_blank"
               >
-                Vercel Team settings
+                Vercelチーム設定
               </Link>
-              )
+              で確認できます)
             </li>
           </ul>
           <Link
@@ -66,21 +66,20 @@ export default function SignUpUserSteps() {
             target="_blank"
             className="text-primary/50 hover:text-primary flex items-center text-sm gap-1 mt-4"
           >
-            Redirect URLs Docs <ArrowUpRight size={14} />
+            リダイレクトURLのドキュメント <ArrowUpRight size={14} />
           </Link>
         </TutorialStep>
       ) : null}
-      <TutorialStep title="Sign up your first user">
+      <TutorialStep title="最初のユーザーを登録する">
         <p>
-          Head over to the{" "}
           <Link
             href="/sign-up"
             className="font-bold hover:underline text-foreground/80"
           >
-            Sign up
+            アカウント登録
           </Link>{" "}
-          page and sign up your first user. It's okay if this is just you for
-          now. Your awesome idea will have plenty of users later!
+          ページに移動して、最初のユーザーを登録してください。今はあなた自身でも構いません。
+          素晴らしいアイデアは、後で多くのユーザーを引き付けるでしょう！
         </p>
       </TutorialStep>
     </ol>
