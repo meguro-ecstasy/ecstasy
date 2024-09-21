@@ -21,18 +21,22 @@ export default async function GetQuestionPage({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>質問一覧</TableHead>
+              <TableHead>質問</TableHead>
+              <TableHead>名前</TableHead>
+              <TableHead>ステータス</TableHead>
+              <TableHead>作成日</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {!!questions ? (
               questions.map((question) => (
                 <TableRow key={question.id}>
-                  <TableCell>
-                    <Link href={`/protected/message/${question.id}`}>
-                        {question.content}
-                    </Link>
-                  </TableCell>
+                  <Link href={`/protected/message/${question.id}`}>
+                    <TableCell>{question.content}</TableCell>
+                    <TableCell>花山薫</TableCell>
+                    <TableCell>オープン</TableCell>
+                    <TableCell>2024/02/20</TableCell>
+                  </Link>
                 </TableRow>
               ))
             ) : (
