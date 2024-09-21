@@ -1,4 +1,5 @@
 import { MessageContainer } from './_containers/message.container';
+import { PostMessage } from './_containers/post.message';
 
 const MessagePage = ({
   searchParams,
@@ -17,6 +18,7 @@ const MessagePage = ({
   return (
     <div>
       <MessageContainer key={questionId} questionId={Number(questionId)} />
+      <PostMessage questionId={Number(questionId)} />
     </div>
   );
 };

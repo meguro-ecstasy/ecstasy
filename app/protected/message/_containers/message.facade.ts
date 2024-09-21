@@ -10,9 +10,7 @@ export const useMessageFacade = ({ questionId }: Props) => {
   const supabase = createClient();
 
   const [userId, setUserId] = useState<string>('');
-  const [messages, setMessages] = useState<
-    Database['public']['Tables']['messages']['Row'][]
-  >([]);
+  const [messages, setMessages] = useState<Tables<'messages'>[]>([]);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
