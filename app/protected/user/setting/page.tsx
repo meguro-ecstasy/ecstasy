@@ -6,10 +6,12 @@ import { notFound } from 'next/navigation';
 
 export default async function Page() {
   const supabase = createClient();
-  const options = await (
-    await supabase.from('tags').select('*')
-  ).data?.map((t) => ({ label: t.name, value: t.id.toString() }));
+  const options = await supabase
+    .from('tags')
+    .select('*')
+    .data?.map((t) => ({ label: t.name, value: t.id.toString() }));
   const user = await supabase.auth.getUser();
+
   const {
     data: { tags },
   } = await supabase
@@ -18,9 +20,9 @@ export default async function Page() {
     .eq('id', user.data.user?.id)
     .single();
 
-  if (!options || !tags[0]) {
+  if (!options) {
     return notFound();
   }
 
-  return <Form options={options} defaultValue={tags[0].id} />;
+  return <Form options={options} defaultValue={tags[0]?.id} />;
 }

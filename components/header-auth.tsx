@@ -19,7 +19,7 @@ export default async function AuthButton() {
               variant={'default'}
               className="font-normal pointer-events-none"
             >
-              Please update .env.local file with anon key and url
+              .env.localファイルにanon keyとURLを設定してください
             </Badge>
           </div>
           <div className="flex gap-2">
@@ -39,7 +39,7 @@ export default async function AuthButton() {
               disabled
               className="opacity-75 cursor-none pointer-events-none"
             >
-              <Link href="/sign-up">Sign up</Link>
+              <Link href="/sign-up">アカウント登録</Link>
             </Button>
           </div>
         </div>
@@ -61,7 +61,7 @@ export default async function AuthButton() {
         <Link href="/sign-in">ログイン</Link>
       </Button>
       <Button asChild size="sm" variant={'default'}>
-        <Link href="/sign-up">Sign up</Link>
+        <Link href="/sign-up">アカウント登録</Link>
       </Button>
     </div>
   );
