@@ -1,1 +1,1 @@
-export * from './message-input'
+export * from './post-message-form'

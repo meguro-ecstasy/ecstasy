@@ -1,7 +1,7 @@
-import { MessageInputComponent } from './_components';
+import { PostMessageFormComponent } from './_components';
 
 const PostMessagePage = () => {
-  return <MessageInputComponent />;
+  return <PostMessageFormComponent />;
 };
 
 export default PostMessagePage;
