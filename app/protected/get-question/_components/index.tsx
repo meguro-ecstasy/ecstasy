@@ -35,7 +35,7 @@ export default async function GetQuestion({
                 <TableCell className="font-medium">花山薫</TableCell>
                 <TableCell>
                   <Link
-                    href={`/protected/message/${question.id}`}
+                    href={`/protected/message?question_id=${question.id}`}
                     className="block"
                   >
                     {question.content}
