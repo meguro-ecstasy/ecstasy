@@ -13,8 +13,10 @@ import { formatDate } from '@/utils';
 
 export default async function GetQuestion({
   questions,
+  tag,
 }: {
   questions: Tables<'questions'>[];
+  tag: string;
 }) {
   const format = 'YYYY年MM月DD日';
   return (
@@ -24,7 +26,7 @@ export default async function GetQuestion({
           <TableRow>
             <TableHead>名前</TableHead>
             <TableHead>質問</TableHead>
-            <TableHead>ステータス</TableHead>
+            <TableHead>タグ</TableHead>
             <TableHead className="hidden md:table-cell">作成日</TableHead>
           </TableRow>
         </TableHeader>
@@ -32,7 +34,10 @@ export default async function GetQuestion({
           {!!questions ? (
             questions.map((question) => (
               <TableRow key={question.id}>
-                <TableCell className="font-medium">花山薫</TableCell>
+                <TableCell className="font-medium">
+                  {/* @ts-ignore */}
+                  {question.users.name}
+                </TableCell>
                 <TableCell>
                   <Link
                     href={`/protected/message?question_id=${question.id}`}
@@ -46,7 +51,7 @@ export default async function GetQuestion({
                     variant="default"
                     className="bg-red-500 text-white font-light	"
                   >
-                    オープン
+                    {tag}
                   </Badge>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
