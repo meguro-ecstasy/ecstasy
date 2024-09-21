@@ -1,3 +1,5 @@
+'use client';
+
 import { AvatarFallback } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Database } from '@/utils/supabase/type';
