@@ -61,7 +61,6 @@ export type Database = {
           deleted_at: string | null
           id: number
           tagId: number
-          title: string
           updated_at: string
           userId: string
         }
@@ -71,7 +70,6 @@ export type Database = {
           deleted_at?: string | null
           id?: number
           tagId: number
-          title: string
           updated_at?: string
           userId: string
         }
@@ -81,7 +79,6 @@ export type Database = {
           deleted_at?: string | null
           id?: number
           tagId?: number
-          title?: string
           updated_at?: string
           userId?: string
         }
