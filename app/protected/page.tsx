@@ -2,11 +2,9 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import {
   NavigationMenu,
-  NavigationMenuContent,
+  NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 
 export default async function ProtectedPage() {
@@ -22,31 +20,30 @@ export default async function ProtectedPage() {
 
   return (
     <NavigationMenu className="w-full max-w-md mx-auto">
-      <NavigationMenuList className="flex justify-center bg-white p-2 rounded-lg shadow-md">
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-lg font-medium text-gray-800 hover:text-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
-            メニュー
-          </NavigationMenuTrigger>
-          <NavigationMenuContent className="bg-white rounded-md shadow-lg p-2 min-w-[200px]">
-            <NavigationMenuLink
-              href="/protected/post-question"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 rounded-md transition-colors duration-150 ease-in-out"
-            >
-              質問を投稿する
-            </NavigationMenuLink>
-            <NavigationMenuLink
-              href="/protected/get-question"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 rounded-md transition-colors duration-150 ease-in-out"
-            >
-              質問を閲覧する
-            </NavigationMenuLink>
-            <NavigationMenuLink
-              href="/user/setting"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 rounded-md transition-colors duration-150 ease-in-out"
-            >
-              プロフィールを編集する
-            </NavigationMenuLink>
-          </NavigationMenuContent>
+      <NavigationMenuList className="flex justify-center bg-white p-2 rounded-lg space-x-2">
+        <NavigationMenuItem className="flex-1">
+          <NavigationMenuLink
+            href="/protected/post-question"
+            className="block text-center px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded-md transition-colors duration-150 ease-in-out w-full"
+          >
+            質問を投稿する
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="flex-1">
+          <NavigationMenuLink
+            href="/protected/get-question"
+            className="block text-center px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded-md transition-colors duration-150 ease-in-out w-full"
+          >
+            質問を閲覧する
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="flex-1">
+          <NavigationMenuLink
+            href="/user/setting"
+            className="block text-center px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded-md transition-colors duration-150 ease-in-out w-full"
+          >
+            プロフィールを編集する
+          </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
