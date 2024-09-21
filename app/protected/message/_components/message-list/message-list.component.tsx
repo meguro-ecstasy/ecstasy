@@ -14,14 +14,14 @@ export const MessageListComponent = ({ userId, messages }: Props) => {
   const { isSenderUser } = useMessagePresenter({ userId });
 
   return (
-    <ScrollArea className="h-[400px] w-full pr-4">
+    <ScrollArea className="w-full pr-4">
       {messages.map((message) => {
         const isSender = isSenderUser(message.user_id);
 
         return (
           <div
             key={message.id}
-            className={`flex ${isSender ? 'justify-end' : 'justify-start'} mb-4`}
+            className={`flex ${isSender ? 'justify-end' : 'justify-start'} mb-6`}
           >
             <div
               className={`flex items-end ${isSender ? 'flex-row-reverse' : 'flex-row'}`}
@@ -30,7 +30,7 @@ export const MessageListComponent = ({ userId, messages }: Props) => {
                 <AvatarFallback>{isSender ? 'U' : 'O'}</AvatarFallback>
               </Avatar>
               <div
-                className={`mx-2 py-2 px-3 rounded-lg ${isSender ? 'bg-blue-500 text-white' : 'bg-gray-200'} whitespace-pre-wrap`}
+                className={`mx-2 py-2 px-3 rounded-lg ${isSender ? 'bg-gray-100' : 'bg-gray-300'}  text-gray-900 whitespace-pre-wrap `}
               >
                 {message.content}
               </div>
