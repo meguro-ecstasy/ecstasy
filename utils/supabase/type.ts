@@ -52,6 +52,13 @@ export type Database = {
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "messages_user_id_fkey1"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
         ]
       }
       questions: {
@@ -91,7 +98,7 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "questions_userId_fkey"
+            foreignKeyName: "questions_userId_fkey1"
             columns: ["userId"]
             isOneToOne: false
             referencedRelation: "users"
@@ -157,10 +164,43 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "user_tags_user_id_fkey"
+            foreignKeyName: "user_tags_user_id_fkey1"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          email: string
+          id: string
+          tag_id: number | null
+        }
+        Insert: {
+          email: string
+          id: string
+          tag_id?: number | null
+        }
+        Update: {
+          email?: string
+          id?: string
+          tag_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "users_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "tags"
             referencedColumns: ["id"]
           },
         ]
