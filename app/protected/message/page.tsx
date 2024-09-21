@@ -1,5 +1,24 @@
-const MessagePage = () => {
-  return <p>MessagePage</p>;
+import { MessageContainer } from './_containers/message.container';
+
+const MessagePage = ({
+  searchParams,
+}: {
+  // see: https://nextjs.org/docs/app/api-reference/file-conventions/page#searchparams-optional
+  searchParams: { [key: string]: string | undefined };
+}) => {
+  const questionId = searchParams['question_id'];
+
+  // NOTE: QuestionのIDがない場合は不正な繊維なのでエラーページを表示
+  if (!questionId) {
+    return <p>Invalid question id</p>;
+  }
+
+  // paramsを変換
+  return (
+    <div>
+      <MessageContainer key={questionId} questionId={Number(questionId)} />
+    </div>
+  );
 };
 
 export default MessagePage;
