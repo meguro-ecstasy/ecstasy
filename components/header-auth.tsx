@@ -1,9 +1,9 @@
-import { signOutAction } from "@/app/actions";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
-import Link from "next/link";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
-import { createClient } from "@/utils/supabase/server";
+import { signOutAction } from '@/app/actions';
+import { hasEnvVars } from '@/utils/supabase/check-env-vars';
+import Link from 'next/link';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
+import { createClient } from '@/utils/supabase/server';
 
 export default async function AuthButton() {
   const {
@@ -16,7 +16,7 @@ export default async function AuthButton() {
         <div className="flex gap-4 items-center">
           <div>
             <Badge
-              variant={"default"}
+              variant={'default'}
               className="font-normal pointer-events-none"
             >
               Please update .env.local file with anon key and url
@@ -26,16 +26,16 @@ export default async function AuthButton() {
             <Button
               asChild
               size="sm"
-              variant={"outline"}
+              variant={'outline'}
               disabled
               className="opacity-75 cursor-none pointer-events-none"
             >
-              <Link href="/sign-in">Sign in</Link>
+              <Link href="/sign-in">ログイン</Link>
             </Button>
             <Button
               asChild
               size="sm"
-              variant={"default"}
+              variant={'default'}
               disabled
               className="opacity-75 cursor-none pointer-events-none"
             >
@@ -48,19 +48,19 @@ export default async function AuthButton() {
   }
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
+      {user.email}!
       <form action={signOutAction}>
-        <Button type="submit" variant={"outline"}>
-          Sign out
+        <Button type="submit" variant={'outline'}>
+          ログアウト
         </Button>
       </form>
     </div>
   ) : (
     <div className="flex gap-2">
-      <Button asChild size="sm" variant={"outline"}>
-        <Link href="/sign-in">Sign in</Link>
+      <Button asChild size="sm" variant={'outline'}>
+        <Link href="/sign-in">ログイン</Link>
       </Button>
-      <Button asChild size="sm" variant={"default"}>
+      <Button asChild size="sm" variant={'default'}>
         <Link href="/sign-up">Sign up</Link>
       </Button>
     </div>
