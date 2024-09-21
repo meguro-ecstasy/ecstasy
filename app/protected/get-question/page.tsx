@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   Table,
   TableHeader,
@@ -27,7 +28,11 @@ export default async function GetQuestionPage({
             {!!questions ? (
               questions.map((question) => (
                 <TableRow key={question.id}>
-                  <TableCell>{question.content}</TableCell>
+                  <TableCell>
+                    <Link href={`/protected/message/${question.id}`}>
+                        {question.content}
+                    </Link>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
