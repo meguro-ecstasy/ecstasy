@@ -11,31 +11,31 @@ export type Database = {
     Tables: {
       messages: {
         Row: {
-          content: string | null
+          content: string
           created_at: string
           deleted_at: string | null
           id: number
-          question_id: number | null
-          updated_at: string | null
-          user_id: string | null
+          question_id: number
+          updated_at: string
+          user_id: string
         }
         Insert: {
-          content?: string | null
+          content: string
           created_at?: string
           deleted_at?: string | null
           id?: number
-          question_id?: number | null
-          updated_at?: string | null
-          user_id?: string | null
+          question_id: number
+          updated_at?: string
+          user_id: string
         }
         Update: {
-          content?: string | null
+          content?: string
           created_at?: string
           deleted_at?: string | null
           id?: number
-          question_id?: number | null
-          updated_at?: string | null
-          user_id?: string | null
+          question_id?: number
+          updated_at?: string
+          user_id?: string
         }
         Relationships: [
           {
@@ -56,34 +56,34 @@ export type Database = {
       }
       questions: {
         Row: {
-          content: string | null
+          content: string
           created_at: string
           deleted_at: string | null
           id: number
-          tagId: number | null
-          title: string | null
-          updated_at: string | null
-          userId: string | null
+          tagId: number
+          title: string
+          updated_at: string
+          userId: string
         }
         Insert: {
-          content?: string | null
+          content: string
           created_at?: string
           deleted_at?: string | null
           id?: number
-          tagId?: number | null
-          title?: string | null
-          updated_at?: string | null
-          userId?: string | null
+          tagId: number
+          title: string
+          updated_at?: string
+          userId: string
         }
         Update: {
-          content?: string | null
+          content?: string
           created_at?: string
           deleted_at?: string | null
           id?: number
-          tagId?: number | null
-          title?: string | null
-          updated_at?: string | null
-          userId?: string | null
+          tagId?: number
+          title?: string
+          updated_at?: string
+          userId?: string
         }
         Relationships: [
           {
@@ -107,22 +107,22 @@ export type Database = {
           created_at: string
           deleted_at: string | null
           id: number
-          name: string | null
-          updated_at: string | null
+          name: string
+          updated_at: string
         }
         Insert: {
           created_at?: string
           deleted_at?: string | null
           id?: number
-          name?: string | null
-          updated_at?: string | null
+          name: string
+          updated_at?: string
         }
         Update: {
           created_at?: string
           deleted_at?: string | null
           id?: number
-          name?: string | null
-          updated_at?: string | null
+          name?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -131,25 +131,25 @@ export type Database = {
           created_at: string
           deleted_at: string | null
           id: number
-          tag_id: number | null
-          updated_at: string | null
-          user_id: string | null
+          tag_id: number
+          updated_at: string
+          user_id: string
         }
         Insert: {
           created_at?: string
           deleted_at?: string | null
           id?: number
-          tag_id?: number | null
-          updated_at?: string | null
-          user_id?: string | null
+          tag_id: number
+          updated_at?: string
+          user_id: string
         }
         Update: {
           created_at?: string
           deleted_at?: string | null
           id?: number
-          tag_id?: number | null
-          updated_at?: string | null
-          user_id?: string | null
+          tag_id?: number
+          updated_at?: string
+          user_id?: string
         }
         Relationships: [
           {
