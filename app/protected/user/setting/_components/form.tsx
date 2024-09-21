@@ -3,7 +3,13 @@ import { getFormProps, useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { useFormState } from 'react-dom';
 import { UserSettingSchema, userSettingSchema } from '../_models';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { postUserSetting } from '../_actions';
 
 type Props = {
@@ -21,7 +27,7 @@ export const Form: React.FC<Props> = ({ options, defaultValue }) => {
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: userSettingSchema });
     },
-    defaultValue: defaultValue ? {value: defaultValue} : null,
+    defaultValue: defaultValue ? { value: defaultValue } : null,
     shouldValidate: 'onBlur',
     shouldRevalidate: 'onInput',
   });
@@ -33,33 +39,35 @@ export const Form: React.FC<Props> = ({ options, defaultValue }) => {
       noValidate
       className="flex flex-col gap-4 items-center"
     >
-<Select
-    key={fields.value.key}
-    name={fields.value.name}
-    defaultValue={fields.value.initialValue}
-    onValueChange={(value) => {
-      form.update({
-        name: fields.value.name,
-        value,
-      })
-    }}
-  >
-    <SelectTrigger
-      id={fields.value.id}
-      aria-invalid={!fields.value.valid || undefined}
-      aria-describedby={!fields.value.valid ? fields.value.errorId : undefined}
-    >
-      <SelectValue placeholder="選択してください" />
-    </SelectTrigger>
-    <SelectContent>
-      {options.map(v => (
-        <SelectItem key={v.value} value={v.value}>{v.label}</SelectItem>
-      ))}
-    </SelectContent>
-  </Select>
-      <button type='submit'>送信</button>
+      <Select
+        key={fields.value.key}
+        name={fields.value.name}
+        defaultValue={fields.value.initialValue}
+        onValueChange={(value) => {
+          form.update({
+            name: fields.value.name,
+            value,
+          });
+        }}
+      >
+        <SelectTrigger
+          id={fields.value.id}
+          aria-invalid={!fields.value.valid || undefined}
+          aria-describedby={
+            !fields.value.valid ? fields.value.errorId : undefined
+          }
+        >
+          <SelectValue placeholder="選択してください" />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((v) => (
+            <SelectItem key={v.value} value={v.value}>
+              {v.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <button type="submit">送信</button>
     </form>
   );
 };
-
-

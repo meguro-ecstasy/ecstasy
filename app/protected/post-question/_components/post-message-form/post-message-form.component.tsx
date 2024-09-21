@@ -4,25 +4,32 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useFormState } from 'react-dom';
 import { postMessageAction } from '../../_actions';
-import {
-  getFormProps,
-  useForm,
-  getInputProps,
-  getTextareaProps,
-} from '@conform-to/react';
+import { getFormProps, useForm, getTextareaProps } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { postMessageSchema, PostMessageSchema } from '../../_models';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
-export const PostMessageFormComponent = () => {
+type Props = {
+  options: {
+    label: string;
+    value: string;
+  }[];
+};
+
+export const PostMessageFormComponent: React.FC<Props> = ({ options }) => {
   const [lastResult, action] = useFormState(postMessageAction, undefined);
   const [form, fields] = useForm<PostMessageSchema>({
     lastResult,
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: postMessageSchema });
     },
-    defaultValue: {
-      tagId: 95,
-    },
+    defaultValue: null,
     shouldValidate: 'onBlur',
     shouldRevalidate: 'onInput',
   });
@@ -37,8 +44,34 @@ export const PostMessageFormComponent = () => {
       <Textarea {...getTextareaProps(fields.content)} autoComplete="false" />
       {fields.content.errors && <div>{fields.content.errors}</div>}
 
-      {/* TODO: タグ選択UIを追加するまで一旦仮で固定値 */}
-      <input {...getInputProps(fields.tagId, { type: 'hidden' })} />
+      <Select
+        key={fields.tagId.key}
+        name={fields.tagId.name}
+        defaultValue={fields.tagId.initialValue}
+        onValueChange={(value) => {
+          form.update({
+            name: fields.tagId.name,
+            value,
+          });
+        }}
+      >
+        <SelectTrigger
+          id={fields.tagId.id}
+          aria-invalid={!fields.tagId.valid || undefined}
+          aria-describedby={
+            !fields.tagId.valid ? fields.tagId.errorId : undefined
+          }
+        >
+          <SelectValue placeholder="選択してください" />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((v) => (
+            <SelectItem key={v.value} value={v.value}>
+              {v.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
       <Button type="submit">送信する</Button>
     </form>
