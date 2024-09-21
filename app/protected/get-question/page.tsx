@@ -3,57 +3,64 @@ import {
   Table,
   TableHeader,
   TableBody,
-  TableFooter,
   TableHead,
   TableRow,
   TableCell,
 } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
 import { Tables } from '@/utils/supabase/type';
+import { formatDate } from '@/utils';
 
 export default async function GetQuestionPage({
   questions,
 }: {
   questions: Tables<'questions'>[];
 }) {
+  const format = 'YYYY年MM月DD日';
   return (
-    <div className="flex-1 w-full flex flex-col gap-12">
-      <div className="container mx-auto mt-8">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>質問</TableHead>
-              <TableHead>名前</TableHead>
-              <TableHead>ステータス</TableHead>
-              <TableHead>作成日</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {!!questions ? (
-              questions.map((question) => (
-                <TableRow key={question.id}>
-                  <Link href={`/protected/message/${question.id}`}>
-                    <TableCell>{question.content}</TableCell>
-                    <TableCell>花山薫</TableCell>
-                    <TableCell>オープン</TableCell>
-                    <TableCell>2024/02/20</TableCell>
+    <>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>名前</TableHead>
+            <TableHead>質問</TableHead>
+            <TableHead>ステータス</TableHead>
+            <TableHead className="hidden md:table-cell">作成日</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {!!questions ? (
+            questions.map((question) => (
+              <TableRow key={question.id}>
+                <TableCell className="font-medium">花山薫</TableCell>
+                <TableCell>
+                  <Link
+                    href={`/protected/message/${question.id}`}
+                    className="block"
+                  >
+                    {question.content}
                   </Link>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={2}>質問はありません</TableCell>
+                </TableCell>
+                <TableCell>
+                  <Badge
+                    variant="default"
+                    className="bg-red-500 text-white font-light	"
+                  >
+                    オープン
+                  </Badge>
+                </TableCell>
+                <TableCell className="hidden md:table-cell">
+                  {formatDate(new Date(question.created_at), format)}
+                </TableCell>
               </TableRow>
-            )}
-          </TableBody>
-          <TableFooter>
+            ))
+          ) : (
             <TableRow>
-              <TableCell colSpan={2}>
-                Total Questions: {!!questions ? questions.length : 0}
-              </TableCell>
+              <TableCell colSpan={2}>質問はありません</TableCell>
             </TableRow>
-          </TableFooter>
-        </Table>
-      </div>
-    </div>
+          )}
+        </TableBody>
+      </Table>
+    </>
   );
 }
