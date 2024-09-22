@@ -28,7 +28,7 @@ export default async function Page() {
   return (
     <Form
       options={options}
-      defaultValue={tag?.tags ? tag.tags[0].id.toString() : null}
+      defaultValue={tag?.tags ? tag.tags[0]?.id.toString() : null}
     />
   );
 }

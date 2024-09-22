@@ -27,7 +27,7 @@ export default async function GetQuestionPage() {
     await supabase
       .from('questions')
       .select('*, users(*)')
-      .eq('tagId', tag[0].id)
+      .eq('tagId', tag[0]?.id)
   ).data;
 
   // 自分がした質問が取れる
@@ -40,7 +40,7 @@ export default async function GetQuestionPage() {
     <GetQuestion
       // @ts-ignore
       questions={questions}
-      tag={tag[0].name}
+      tag={tag[0]?.name}
       // @ts-ignore
       askedQuestions={askedQuestions}
     ></GetQuestion>
