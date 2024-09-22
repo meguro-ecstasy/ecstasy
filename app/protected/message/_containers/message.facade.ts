@@ -1,5 +1,5 @@
 import { createClient } from '@/utils/supabase/client';
-import { Database, Tables } from '@/utils/supabase/type';
+import { Tables } from '@/utils/supabase/type';
 import { useEffect, useState } from 'react';
 
 type Props = {
@@ -18,8 +18,10 @@ export const useMessageFacade = ({ questionId }: Props) => {
         setUserId(data.user.id);
       }
     });
+  }, [supabase.auth]);
 
-    // 初期データの取得
+  // 初期データの取得
+  useEffect(() => {
     supabase
       .from('messages')
       .select('*')
@@ -29,10 +31,12 @@ export const useMessageFacade = ({ questionId }: Props) => {
           setMessages(data);
         }
       });
+  }, [questionId, supabase, userId]);
 
-    // リアルタイムサブスクリプションの設定
-    const subscription = supabase
-      .channel('messages_changes')
+  // リアルタイムサブスクリプションの設定
+  useEffect(() => {
+    const channels = supabase.channel('messages_changes');
+    const subscription = channels
       .on(
         'postgres_changes',
         {
@@ -42,14 +46,12 @@ export const useMessageFacade = ({ questionId }: Props) => {
           filter: `question_id=eq.${questionId}`,
         },
         (payload) => {
+          console.log(payload);
           if (payload.eventType === 'INSERT') {
-            setMessages((prevMessages) => [
-              ...prevMessages,
-              payload.new as Tables<'messages'>,
-            ]);
+            setMessages((prev) => [...prev, payload.new as Tables<'messages'>]);
           } else if (payload.eventType === 'UPDATE') {
-            setMessages((prevMessages) =>
-              prevMessages.map((message) =>
+            setMessages((prev) =>
+              prev.map((message) =>
                 message.id === payload.new.id
                   ? (payload.new as Tables<'messages'>)
                   : message,
@@ -68,7 +70,7 @@ export const useMessageFacade = ({ questionId }: Props) => {
     return () => {
       subscription.unsubscribe();
     };
-  }, [questionId]);
+  }, [questionId, supabase]);
 
   return { messages, userId } as const;
 };
