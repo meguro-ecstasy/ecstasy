@@ -25,7 +25,7 @@ export default async function GetQuestion({
   return (
     <>
       <div>
-        <Label>助けが必要な質問</Label>
+        <Label className="text-lg">助けが必要な質問</Label>
         <Table>
           <TableHeader>
             <TableRow>
@@ -73,7 +73,7 @@ export default async function GetQuestion({
         </Table>
       </div>
       <div>
-        <Label>自分がした質問</Label>
+        <Label className="text-lg">自分がした質問</Label>
         <Table>
           <TableHeader>
             <TableRow>

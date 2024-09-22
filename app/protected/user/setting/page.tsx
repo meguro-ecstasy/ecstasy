@@ -26,6 +26,11 @@ export default async function Page() {
   }
 
   return (
-    <Form options={options} defaultValue={tag ? tag.id.toString() : null} />
+    <div className="flex flex-col items-center gap-10">
+      <h1 className="flex text-2xl">
+        得意な分野を設定して、困ってる人を助けてあげよう！
+      </h1>
+      <Form options={options} defaultValue={tag ? tag.id.toString() : null} />
+    </div>
   );
 }

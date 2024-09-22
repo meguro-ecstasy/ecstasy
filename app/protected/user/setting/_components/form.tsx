@@ -11,6 +11,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { postUserSetting } from '../_actions';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 
 type Props = {
   options: {
@@ -37,37 +39,49 @@ export const Form: React.FC<Props> = ({ options, defaultValue }) => {
       {...getFormProps(form)}
       action={action}
       noValidate
-      className="flex flex-col gap-4 items-center"
+      className="flex flex-col gap-4 items-center w-full"
     >
-      <Select
-        key={fields.value.key}
-        name={fields.value.name}
-        defaultValue={fields.value.initialValue}
-        onValueChange={(value) => {
-          form.update({
-            name: fields.value.name,
-            value,
-          });
-        }}
-      >
-        <SelectTrigger
-          id={fields.value.id}
-          aria-invalid={!fields.value.valid || undefined}
-          aria-describedby={
-            !fields.value.valid ? fields.value.errorId : undefined
-          }
-        >
-          <SelectValue placeholder="選択してください" />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((v) => (
-            <SelectItem key={v.value} value={v.value}>
-              {v.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <button type="submit">送信</button>
+      <div className="flex flex-col items-center w-full gap-10">
+        <div className="w-full flex flex-col items-center gap-2">
+          <Label className="text-left w-full text-lg" htmlFor={fields.value.id}>
+            タグ
+          </Label>
+          <Select
+            key={fields.value.key}
+            name={fields.value.name}
+            defaultValue={fields.value.initialValue}
+            onValueChange={(value) => {
+              form.update({
+                name: fields.value.name,
+                value,
+              });
+            }}
+          >
+            <SelectTrigger
+              id={fields.value.id}
+              aria-invalid={!fields.value.valid || undefined}
+              aria-describedby={
+                !fields.value.valid ? fields.value.errorId : undefined
+              }
+            >
+              <SelectValue placeholder="選択してください" />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((v) => (
+                <SelectItem key={v.value} value={v.value}>
+                  {v.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="w-full">
+          <Button className="w-full text-lg" type="submit">
+            保存する
+          </Button>
+        </div>
+      </div>
     </form>
   );
 };
