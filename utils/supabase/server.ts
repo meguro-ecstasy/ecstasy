@@ -1,6 +1,6 @@
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
-import { Database } from "./type";
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
+import { Database } from './type';
 
 export const createClient = () => {
   const cookieStore = cookies();
@@ -12,7 +12,7 @@ export const createClient = () => {
       global: {
         fetch: (url: any, options = {}) => {
           return fetch(url, { ...options, cache: 'no-store' });
-        }
+        },
       },
       cookies: {
         getAll() {
