@@ -1,7 +1,7 @@
 'use client';
 import { getFormProps, useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormState } from 'react-dom';
 import { UserSettingSchema, userSettingSchema } from '../_models';
 import {
   Select,
@@ -11,7 +11,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { postUserSetting } from '../_actions';
-import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { SubmitButton } from '@/components/submit-button';
 

@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useFormState } from 'react-dom';
 import { postMessageAction } from '../../_actions';

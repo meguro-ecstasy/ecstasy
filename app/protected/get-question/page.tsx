@@ -37,9 +37,11 @@ export default async function GetQuestionPage() {
 
   return (
     <GetQuestion
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       questions={questions}
       tag={tag.name}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       askedQuestions={askedQuestions}
     ></GetQuestion>
