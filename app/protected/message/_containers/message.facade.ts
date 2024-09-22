@@ -20,17 +20,15 @@ export const useMessageFacade = ({ questionId }: Props) => {
     });
 
     // 初期データの取得
-    const fetchMessages = async () => {
-      const { data } = await supabase
-        .from('messages')
-        .select('*')
-        .eq('question_id', questionId);
-      if (data) {
-        setMessages(data);
-      }
-    };
-
-    fetchMessages();
+    supabase
+      .from('messages')
+      .select('*')
+      .eq('question_id', questionId)
+      .then(({ data }) => {
+        if (data) {
+          setMessages(data);
+        }
+      });
 
     // リアルタイムサブスクリプションの設定
     const subscription = supabase

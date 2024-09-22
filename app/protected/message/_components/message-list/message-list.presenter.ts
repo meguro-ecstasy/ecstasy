@@ -7,7 +7,7 @@ type Props = {
 export const useMessagePresenter = ({ userId }: Props) => {
   const isSenderUser = useCallback(
     (messageAuthor: string) => messageAuthor === userId,
-    [],
+    [userId],
   );
 
   return {
