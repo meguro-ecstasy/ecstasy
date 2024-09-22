@@ -6,6 +6,7 @@ import { ThemeProvider } from 'next-themes';
 import Link from 'next/link';
 import './globals.css';
 import { ProtectedHeader } from './_components/protest-header';
+import { createClient } from '@/utils/supabase/server';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -17,11 +18,16 @@ export const metadata = {
   description: 'The fastest way to build apps with Next.js and Supabase',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const {
+    data: { user },
+  } = await createClient().auth.getUser();
+  const isLogged = user !== null;
+
   return (
     <html lang="en" className="font-sans" suppressHydrationWarning>
       <body className="bg-background text-foreground">
@@ -36,11 +42,9 @@ export default function RootLayout({
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
                 <div className="w-full flex justify-between items-center p-3 px-5 text-sm">
                   <div className="flex gap-5 items-center font-semibold">
-                    <Link href={'/protected/post-question'}>
-                      目黒エクスタシー
-                    </Link>
+                    <Link href={'/protected/post-question'}>おむすび</Link>
                   </div>
-                  <ProtectedHeader />
+                  {isLogged && <ProtectedHeader />}
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>
               </nav>
