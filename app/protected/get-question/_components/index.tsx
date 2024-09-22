@@ -99,7 +99,8 @@ export default async function GetQuestion({
                       variant="outline"
                       className="bg-red-500 text-white font-light"
                     >
-                      {tag}
+                      {/* @ts-ignore */}
+                      {question.tags.name}
                     </Badge>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">

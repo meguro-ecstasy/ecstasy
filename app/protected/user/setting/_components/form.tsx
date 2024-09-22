@@ -1,7 +1,7 @@
 'use client';
 import { getFormProps, useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
-import { useFormState } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 import { UserSettingSchema, userSettingSchema } from '../_models';
 import {
   Select,
@@ -13,6 +13,7 @@ import {
 import { postUserSetting } from '../_actions';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { SubmitButton } from '@/components/submit-button';
 
 type Props = {
   options: {
@@ -77,9 +78,7 @@ export const Form: React.FC<Props> = ({ options, defaultValue }) => {
         </div>
 
         <div className="w-full">
-          <Button className="w-full text-lg" type="submit">
-            保存する
-          </Button>
+          <SubmitButton>保存する</SubmitButton>
         </div>
       </div>
     </form>
