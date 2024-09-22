@@ -22,6 +22,7 @@ export default async function GetQuestionPage() {
     return notFound();
   }
 
+  // もらった質問
   const questions = (
     await supabase
       .from('questions')
@@ -29,6 +30,19 @@ export default async function GetQuestionPage() {
       .eq('tagId', tag[0].id)
   ).data;
 
-  // @ts-ignore
-  return <GetQuestion questions={questions} tag={tag[0].name}></GetQuestion>;
+  // 自分がした質問が取れる
+  const { data: askedQuestions } = await supabase
+    .from('questions')
+    .select('* users(*)')
+    .eq('userId', user.user.id);
+
+  return (
+    <GetQuestion
+      // @ts-ignore
+      questions={questions}
+      tag={tag[0].name}
+      // @ts-ignore
+      askedQuestions={askedQuestions}
+    ></GetQuestion>
+  );
 }
