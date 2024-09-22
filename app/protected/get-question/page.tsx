@@ -26,7 +26,7 @@ export default async function GetQuestionPage() {
       .from('questions')
       .select('*, users(*)')
       .eq('tagId', tag.id)
-      .neq('userId', tag.id)
+      .neq('userId', user.user.id)
   ).data;
 
   // 自分がした質問が取れる
