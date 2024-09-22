@@ -21,7 +21,13 @@ export default async function Page() {
     .single();
   const tag = data?.tags;
 
-  console.log(tag);
+  const { data: userInfo } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', user.data.user.id)
+    .limit(1)
+    .single();
+  const name = userInfo?.name;
 
   if (!options) {
     return notFound();
@@ -32,7 +38,11 @@ export default async function Page() {
       <h1 className="flex text-2xl">
         得意な分野を設定して、困ってる人を助けてあげよう！
       </h1>
-      <Form options={options} defaultValue={tag ? tag.id.toString() : null} />
+      <Form
+        name={name ?? ''}
+        options={options}
+        defaultValue={tag ? tag.id.toString() : null}
+      />
     </div>
   );
 }
