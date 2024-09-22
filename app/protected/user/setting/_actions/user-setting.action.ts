@@ -25,9 +25,9 @@ export const postUserSetting = async (
     return submission.reply();
   }
 
-  await supabase.from("users").update({
+  await supabase.from("users").upsert({
     id: user.id,
-    email: user.email,
+    email: user.email!,
     tag_id: Number(submission.value?.value)
   })
 

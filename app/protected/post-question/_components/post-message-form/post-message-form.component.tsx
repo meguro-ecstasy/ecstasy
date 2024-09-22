@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
+import { SubmitButton } from '@/components/submit-button';
 
 type Props = {
   options: {
@@ -97,9 +98,7 @@ export const PostMessageFormComponent: React.FC<Props> = ({ options }) => {
           )}
         </div>
 
-        <Button className="w-full" type="submit">
-          投稿する
-        </Button>
+        <SubmitButton>投稿する</SubmitButton>
       </div>
     </form>
   );

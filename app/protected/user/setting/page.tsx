@@ -21,6 +21,8 @@ export default async function Page() {
     .single();
   const tag = data?.tags;
 
+  console.log(tag);
+
   if (!options) {
     return notFound();
   }

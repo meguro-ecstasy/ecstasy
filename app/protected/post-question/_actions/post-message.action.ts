@@ -32,5 +32,7 @@ export const postMessageAction = async (
   });
 
   // フォームをリセットする
-  return submission.reply({ resetForm: true });
+  submission.reply({ resetForm: true });
+
+  redirect("/protected/get-question")
 };

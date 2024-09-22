@@ -22,13 +22,17 @@ export default async function GetQuestionPage() {
 
   // もらった質問
   const questions = (
-    await supabase.from('questions').select('*, users(*)').eq('tagId', tag.id)
+    await supabase
+      .from('questions')
+      .select('*, users(*)')
+      .eq('tagId', tag.id)
+      .neq('userId', tag.id)
   ).data;
 
   // 自分がした質問が取れる
   const { data: askedQuestions } = await supabase
     .from('questions')
-    .select('* users(*)')
+    .select('*, tags(*)')
     .eq('userId', user.user.id);
 
   return (
