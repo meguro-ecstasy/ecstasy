@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import GetQuestion from './_components';
 import { createClient } from '@/utils/supabase/server';
-import { QueryData } from '@supabase/supabase-js';
 
 export default async function GetQuestionPage() {
   const supabase = createClient();
@@ -10,13 +9,12 @@ export default async function GetQuestionPage() {
     return notFound();
   }
 
-  const tag = await (
-    await supabase
-      .from('users')
-      .select('tags!user_tags(*)')
-      .eq('id', user.user?.id)
-      .single()
-  ).data?.tags;
+  const { data } = await supabase
+    .from('users')
+    .select('tags(*)')
+    .eq('id', user.user.id)
+    .single();
+  const tag = data?.tags;
 
   if (!tag) {
     return notFound();
@@ -24,10 +22,7 @@ export default async function GetQuestionPage() {
 
   // もらった質問
   const questions = (
-    await supabase
-      .from('questions')
-      .select('*, users(*)')
-      .eq('tagId', tag[0]?.id)
+    await supabase.from('questions').select('*, users(*)').eq('tagId', tag.id)
   ).data;
 
   // 自分がした質問が取れる
@@ -40,7 +35,7 @@ export default async function GetQuestionPage() {
     <GetQuestion
       // @ts-ignore
       questions={questions}
-      tag={tag[0]?.name}
+      tag={tag.name}
       // @ts-ignore
       askedQuestions={askedQuestions}
     ></GetQuestion>
