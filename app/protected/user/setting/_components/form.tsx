@@ -17,7 +17,7 @@ type Props = {
     label: string;
     value: string;
   }[];
-  defaultValue?: string;
+  defaultValue: string | null;
 };
 
 export const Form: React.FC<Props> = ({ options, defaultValue }) => {
