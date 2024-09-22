@@ -130,62 +130,23 @@ export type Database = {
         }
         Relationships: []
       }
-      user_tags: {
-        Row: {
-          created_at: string
-          deleted_at: string | null
-          id: number
-          tag_id: number
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          deleted_at?: string | null
-          id?: number
-          tag_id: number
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          deleted_at?: string | null
-          id?: number
-          tag_id?: number
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "user_tags_tag_id_fkey"
-            columns: ["tag_id"]
-            isOneToOne: false
-            referencedRelation: "tags"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "user_tags_user_id_fkey1"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       users: {
         Row: {
           email: string
           id: string
+          name: string
           tag_id: number | null
         }
         Insert: {
           email: string
           id: string
+          name?: string
           tag_id?: number | null
         }
         Update: {
           email?: string
           id?: string
+          name?: string
           tag_id?: number | null
         }
         Relationships: [
