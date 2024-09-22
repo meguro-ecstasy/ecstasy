@@ -29,24 +29,20 @@ export default async function GetQuestion({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>名前</TableHead>
-              <TableHead>質問</TableHead>
-              <TableHead>タグ</TableHead>
-              <TableHead className="hidden md:table-cell">作成日</TableHead>
+              <TableHead className="w-96">質問内容</TableHead>
+              <TableHead className="w-32">タグ</TableHead>
+              <TableHead className="w-32">質問した人</TableHead>
+              <TableHead className="w-32 md:table-cell">作成日</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {!!questions ? (
               questions.map((question) => (
                 <TableRow key={question.id}>
-                  <TableCell className="font-medium">
-                    {/* @ts-ignore */}
-                    {question.users.name}
-                  </TableCell>
                   <TableCell>
                     <Link
                       href={`/protected/message?question_id=${question.id}`}
-                      className="block"
+                      className="block whitespace-pre-wrap"
                     >
                       {question.content}
                     </Link>
@@ -59,6 +55,10 @@ export default async function GetQuestion({
                       {tag}
                     </Badge>
                   </TableCell>
+                  <TableCell className="font-medium">
+                    {/* @ts-expect-error -- _ */}
+                    {question.users.name}
+                  </TableCell>
                   <TableCell className="hidden md:table-cell">
                     {formatDate(new Date(question.created_at), format)}
                   </TableCell>
@@ -66,7 +66,7 @@ export default async function GetQuestion({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={2}>質問はありません</TableCell>
+                <TableCell colSpan={4}>質問はありません</TableCell>
               </TableRow>
             )}
           </TableBody>
@@ -77,9 +77,9 @@ export default async function GetQuestion({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>質問</TableHead>
-              <TableHead>タグ</TableHead>
-              <TableHead className="hidden md:table-cell">作成日</TableHead>
+              <TableHead className="w-96">質問</TableHead>
+              <TableHead className="w-32">タグ</TableHead>
+              <TableHead className="w-32 md:table-cell">作成日</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -89,7 +89,7 @@ export default async function GetQuestion({
                   <TableCell>
                     <Link
                       href={`/protected/message?question_id=${question.id}`}
-                      className="block"
+                      className="block whitespace-pre-wrap"
                     >
                       {question.content}
                     </Link>
@@ -110,7 +110,7 @@ export default async function GetQuestion({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={2}>質問はありません</TableCell>
+                <TableCell colSpan={3}>質問はありません</TableCell>
               </TableRow>
             )}
           </TableBody>

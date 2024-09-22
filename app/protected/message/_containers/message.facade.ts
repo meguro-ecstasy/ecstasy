@@ -37,7 +37,6 @@ export const useMessageFacade = ({ questionId }: Props) => {
           filter: `question_id=eq.${questionId}`,
         },
         (payload) => {
-          console.log(payload);
           if (payload.eventType === 'INSERT') {
             setMessages((prev) => [...prev, payload.new as Tables<'messages'>]);
           } else if (payload.eventType === 'UPDATE') {
