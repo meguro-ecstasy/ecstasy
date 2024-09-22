@@ -1,3 +1,3 @@
 export default async function Index() {
-  return <h1>おにぎり</h1>;
+  return <h1>おむすび</h1>;
 }
