@@ -1,1 +1,1 @@
-export * from './user-setting.model'
+export * from './user-setting.model';

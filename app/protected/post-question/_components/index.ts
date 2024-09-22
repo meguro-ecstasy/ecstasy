@@ -1,1 +1,1 @@
-export * from './post-message-form'
+export * from './post-message-form';

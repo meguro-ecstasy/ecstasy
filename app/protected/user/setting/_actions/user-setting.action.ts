@@ -25,12 +25,12 @@ export const postUserSetting = async (
     return submission.reply();
   }
 
-  await supabase.from("users").upsert({
+  await supabase.from('users').upsert({
     id: user.id,
     email: user.email!,
     name: submission.value.name,
-    tag_id: Number(submission.value?.value)
-  })
+    tag_id: Number(submission.value?.value),
+  });
 
   return submission.reply({ resetForm: false });
 };
