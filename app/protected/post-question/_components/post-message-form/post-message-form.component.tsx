@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
 
 type Props = {
   options: {
@@ -43,8 +44,15 @@ export const PostMessageFormComponent: React.FC<Props> = ({ options }) => {
     >
       <div className="flex flex-col w-full items-center gap-10">
         <div className="flex flex-col w-full items-center gap-2">
+          <Label
+            className="text-left w-full text-lg"
+            htmlFor={fields.content.id}
+          >
+            概要
+          </Label>
           <Textarea
             {...getTextareaProps(fields.content)}
+            id={fields.content.id}
             autoComplete="false"
           />
           {fields.content.errors && (
@@ -53,6 +61,9 @@ export const PostMessageFormComponent: React.FC<Props> = ({ options }) => {
         </div>
 
         <div className="flex flex-col w-full items-center gap-2">
+          <Label className="text-left w-full text-lg" htmlFor={fields.tagId.id}>
+            タグ
+          </Label>
           <Select
             key={fields.tagId.key}
             name={fields.tagId.name}

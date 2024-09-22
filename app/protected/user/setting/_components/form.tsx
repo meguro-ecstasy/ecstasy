@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select';
 import { postUserSetting } from '../_actions';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 
 type Props = {
   options: {
@@ -40,8 +41,11 @@ export const Form: React.FC<Props> = ({ options, defaultValue }) => {
       noValidate
       className="flex flex-col gap-4 items-center w-full"
     >
-      <div className="flex flex-col items-center w-full gap-5">
-        <div className="w-full">
+      <div className="flex flex-col items-center w-full gap-10">
+        <div className="w-full flex flex-col items-center gap-2">
+          <Label className="text-left w-full text-lg" htmlFor={fields.value.id}>
+            タグ
+          </Label>
           <Select
             key={fields.value.key}
             name={fields.value.name}
@@ -73,7 +77,7 @@ export const Form: React.FC<Props> = ({ options, defaultValue }) => {
         </div>
 
         <div className="w-full">
-          <Button className="w-full" type="submit">
+          <Button className="w-full text-lg" type="submit">
             保存する
           </Button>
         </div>

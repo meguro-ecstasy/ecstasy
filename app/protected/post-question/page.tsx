@@ -12,7 +12,15 @@ const PostMessagePage = async () => {
     return notFound();
   }
 
-  return <PostMessageFormComponent options={options} />;
+  return (
+    <div>
+      <h1 className="text-center text-2xl">
+        不明点について概要を記入して分野のタグを選択してね！
+      </h1>
+      <div className="h-10"></div>
+      <PostMessageFormComponent options={options} />
+    </div>
+  );
 };
 
 export default PostMessagePage;
