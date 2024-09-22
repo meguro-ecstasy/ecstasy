@@ -18,7 +18,7 @@ export const useMessageFacade = ({ questionId }: Props) => {
         setUserId(data.user.id);
       }
     });
-  }, []);
+  }, [supabase.auth]);
 
   // 初期データの取得
   useEffect(() => {
@@ -31,7 +31,7 @@ export const useMessageFacade = ({ questionId }: Props) => {
           setMessages(data);
         }
       });
-  }, [questionId, userId]);
+  }, [questionId, supabase, userId]);
 
   // リアルタイムサブスクリプションの設定
   useEffect(() => {
@@ -70,7 +70,7 @@ export const useMessageFacade = ({ questionId }: Props) => {
     return () => {
       subscription.unsubscribe();
     };
-  }, [questionId]);
+  }, [questionId, supabase]);
 
   return { messages, userId } as const;
 };
