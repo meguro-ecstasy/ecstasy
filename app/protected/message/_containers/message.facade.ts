@@ -9,16 +9,7 @@ type Props = {
 export const useMessageFacade = ({ questionId }: Props) => {
   const supabase = createClient();
 
-  const [userId, setUserId] = useState<string>('');
   const [messages, setMessages] = useState<Tables<'messages'>[]>([]);
-
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) {
-        setUserId(data.user.id);
-      }
-    });
-  }, [supabase.auth]);
 
   // 初期データの取得
   useEffect(() => {
@@ -31,7 +22,7 @@ export const useMessageFacade = ({ questionId }: Props) => {
           setMessages(data);
         }
       });
-  }, [questionId, supabase, userId]);
+  }, [questionId, supabase]);
 
   // リアルタイムサブスクリプションの設定
   useEffect(() => {
@@ -72,5 +63,5 @@ export const useMessageFacade = ({ questionId }: Props) => {
     };
   }, [questionId, supabase]);
 
-  return { messages, userId } as const;
+  return { messages } as const;
 };

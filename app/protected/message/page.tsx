@@ -1,5 +1,8 @@
-import { MessageContainer } from './_containers/message.container';
-import { PostMessage } from './_containers/post.message';
+'use client';
+
+import { useMemo } from 'react';
+import { PostMessage, MessageContainer } from './_containers';
+import { useMessagePageFacade } from './message-page.facade';
 
 const MessagePage = ({
   searchParams,
@@ -7,18 +10,23 @@ const MessagePage = ({
   // see: https://nextjs.org/docs/app/api-reference/file-conventions/page#searchparams-optional
   searchParams: { [key: string]: string | undefined };
 }) => {
-  const questionId = searchParams['question_id'];
+  const { userId } = useMessagePageFacade();
+  const questionId = useMemo(() => searchParams['question_id'], [searchParams]);
 
   // NOTE: QuestionのIDがない場合は不正な繊維なのでエラーページを表示
   if (!questionId) {
     return <p>Invalid question id</p>;
   }
 
-  // paramsを変換
+  // TODO: paramsを変換
   return (
-    <div>
-      <MessageContainer key={questionId} questionId={Number(questionId)} />
-      <PostMessage questionId={Number(questionId)} />
+    <div className="flex flex-col gap-4">
+      <MessageContainer
+        key={questionId}
+        questionId={Number(questionId)}
+        userId={userId}
+      />
+      <PostMessage questionId={Number(questionId)} userId={userId} />
     </div>
   );
 };

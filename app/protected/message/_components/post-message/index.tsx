@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { createClient } from '@/utils/supabase/client';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 type Props = {
   questionId: number;
@@ -14,24 +14,24 @@ export const PostMessageComponent = ({ questionId, userId }: Props) => {
   const [content, setContent] = useState('');
   const supabase = createClient();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const { error } = await supabase
-      .from('messages')
-      .insert({
+      const { error } = await supabase.from('messages').insert({
         user_id: userId,
         question_id: questionId,
         content,
-      })
-      .select('*');
+      });
 
-    if (error) {
-      console.error('エラーが発生しました:', error);
-    } else {
-      setContent(''); // フォームをリセット
-    }
-  };
+      if (error) {
+        console.error('エラーが発生しました:', error);
+      } else {
+        setContent(''); // フォームをリセット
+      }
+    },
+    [content, questionId, supabase, userId],
+  );
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-center">
