@@ -41,7 +41,7 @@ export default async function GetQuestion({
                 <TableRow key={question.id}>
                   <TableCell>
                     <Link
-                      href={`/protected/message?question_id=${question.id}`}
+                      href={`/protected/get-question/${question.id}`}
                       className="block whitespace-pre-wrap"
                     >
                       {question.content}
@@ -88,7 +88,7 @@ export default async function GetQuestion({
                 <TableRow key={question.id}>
                   <TableCell>
                     <Link
-                      href={`/protected/message?question_id=${question.id}`}
+                      href={`/protected/get-question/${question.id}`}
                       className="block whitespace-pre-wrap"
                     >
                       {question.content}
