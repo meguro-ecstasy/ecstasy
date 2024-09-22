@@ -14,8 +14,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Next.js and Supabase Starter Kit',
-  description: 'The fastest way to build apps with Next.js and Supabase',
+  title: 'おむすび 🍙',
+  description: '知識を持っている人と、知りたい人を繋げるプラットフォーム',
 };
 
 export default async function RootLayout({
@@ -42,7 +42,7 @@ export default async function RootLayout({
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
                 <div className="w-full flex justify-between items-center p-3 px-5 text-sm">
                   <div className="flex gap-5 items-center font-semibold">
-                    <Link href={'/protected/post-question'}>おむすび</Link>
+                    <Link href={'/protected/post-question'}>おむすび 🍙</Link>
                   </div>
                   {isLogged && <ProtectedHeader />}
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
